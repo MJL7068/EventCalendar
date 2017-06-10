@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Event Calendar</title>
+    </head>
+    
+    <body>
+        <h1>Events</h1>
+        <ul>
+            <li th:each="node : ${list}">
+                <span th:text="${node}"></span>
+            </li>
+        </ul>
+        
+        <h2>Add a new event</h2>
+        <form th:action="@{/}" method="POST">
+            <input type="text" name="name" />
+            <input type="text" name="description" />
+            <input type="submit"/>
+        </form>
+    </body>
+</html>
