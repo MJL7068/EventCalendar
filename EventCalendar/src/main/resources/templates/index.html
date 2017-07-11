@@ -7,8 +7,9 @@
     <body>
         <h1>Events</h1>
         <ul>
-            <li th:each="node : ${list}">
-                <span th:text="${node}"></span>
+            <li th:each="event : ${list}">
+                <a th:href="@{/{eventId}(eventId=${event.id})}" th:text="${event.name}">event name</a>
+                <span th:text="${event.description}"></span>
             </li>
         </ul>
         
