@@ -1,0 +1,11 @@
+wad/controller/DefaultController.class
+wad/controller/EventController.class
+wad/repository/AccountRepository.class
+wad/config/ProductionSecurityConfiguration.class
+wad/config/DefaultSecurityConfiguration.class
+wad/EventCalendarApplication.class
+wad/repository/EventRepository.class
+wad/service/CustomUserDetailsService.class
+wad/domain/Event.class
+wad/domain/Account.class
+wad/config/ProductionProfile.class

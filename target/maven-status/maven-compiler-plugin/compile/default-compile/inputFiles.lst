@@ -1,0 +1,11 @@
+/home/matleino/EventCalendar/src/main/java/wad/repository/EventRepository.java
+/home/matleino/EventCalendar/src/main/java/wad/config/DefaultSecurityConfiguration.java
+/home/matleino/EventCalendar/src/main/java/wad/controller/EventController.java
+/home/matleino/EventCalendar/src/main/java/wad/domain/Account.java
+/home/matleino/EventCalendar/src/main/java/wad/config/ProductionProfile.java
+/home/matleino/EventCalendar/src/main/java/wad/EventCalendarApplication.java
+/home/matleino/EventCalendar/src/main/java/wad/repository/AccountRepository.java
+/home/matleino/EventCalendar/src/main/java/wad/config/ProductionSecurityConfiguration.java
+/home/matleino/EventCalendar/src/main/java/wad/domain/Event.java
+/home/matleino/EventCalendar/src/main/java/wad/controller/DefaultController.java
+/home/matleino/EventCalendar/src/main/java/wad/service/CustomUserDetailsService.java
