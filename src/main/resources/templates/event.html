@@ -3,12 +3,21 @@
     <head>
         <title>Event Calendar</title>
     </head>
-    
+
     <body>
         <h1>Event</h1>
         <span th:text="${event.name}"></span>
         <span th:text="${event.description}"></span>
-        
+
+        <ul>
+            <li th:each="account : ${event.participants}">
+                <span th:text="${account.username}">name</span>
+                <form th:action="@{/removeParticipant/{eventId}/{username}({eventId}(eventId=${event.id},username=${account.username})}" th:method="DELETE">
+                    <input type="submit" value="Remove join"/>
+                </form>
+            </li>
+        </ul>
+
         <a href="/">Back to index</a>
     </body>
 </html>

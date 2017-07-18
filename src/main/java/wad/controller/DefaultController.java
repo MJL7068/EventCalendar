@@ -45,6 +45,9 @@ public class DefaultController {
 //    public String index() {
 //        return "redirect/events";
 //    }
+    
+    
+    
     @Autowired
     private PasswordEncoder passwordEncoder;
  

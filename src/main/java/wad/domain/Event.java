@@ -1,5 +1,6 @@
 package wad.domain;
 
+import java.util.HashMap;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -12,7 +13,7 @@ public class Event extends AbstractPersistable<Long> {
     private String description;
     
     @OneToMany
-    private List<Account> participitants;
+    private List<Account> participants;
 
     public Event() {
     }
@@ -30,8 +31,8 @@ public class Event extends AbstractPersistable<Long> {
         return description;
     }
 
-    public List<Account> getParticipitants() {
-        return participitants;
+    public List<Account> getParticipants() {
+        return participants;
     }
 
     public void setName(String name) {
@@ -42,8 +43,8 @@ public class Event extends AbstractPersistable<Long> {
         this.description = description;
     }
 
-    public void setParticipitants(List<Account> participitants) {
-        this.participitants = participitants;
+    public void setParticipants(List<Account> participitants) {
+        this.participants = participitants;
     }
     
 }

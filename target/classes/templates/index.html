@@ -3,16 +3,18 @@
     <head>
         <title>Event Calendar</title>
     </head>
-    
+
     <body>
         <h1>Events</h1>
         <ul>
             <li th:each="event : ${list}">
                 <a th:href="@{/{eventId}(eventId=${event.id})}" th:text="${event.name}">event name</a>
                 <span th:text="${event.description}"></span>
+                <form th:action="@{/{id}(id=${event.id})}" th:method="POST"><input type="submit" value="Join"/></form>
+                <form th:action="@{/{id}(id=${event.id})}" th:method="DELETE"><input type="submit" value="Remove"/></form>
             </li>
         </ul>
-        
+
         <h2>Add a new event</h2>
         <form th:action="@{/}" method="POST">
             <input type="text" name="name" />
