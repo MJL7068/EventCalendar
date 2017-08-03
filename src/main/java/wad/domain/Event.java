@@ -13,7 +13,7 @@ public class Event extends AbstractPersistable<Long> {
     private String description;
     
     @OneToMany
-    private List<Account> participants;
+    private List<Person> participants;
 
     public Event() {
     }
@@ -31,7 +31,7 @@ public class Event extends AbstractPersistable<Long> {
         return description;
     }
 
-    public List<Account> getParticipants() {
+    public List<Person> getParticipants() {
         return participants;
     }
 
@@ -43,7 +43,7 @@ public class Event extends AbstractPersistable<Long> {
         this.description = description;
     }
 
-    public void setParticipants(List<Account> participitants) {
+    public void setParticipants(List<Person> participitants) {
         this.participants = participitants;
     }
     

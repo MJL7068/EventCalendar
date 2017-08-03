@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import wad.domain.Account;
-import wad.repository.AccountRepository;
+import wad.domain.Authority;
+import wad.domain.Person;
+import wad.repository.PersonRepository;
 
 @Controller
 public class DefaultController {
@@ -52,26 +54,26 @@ public class DefaultController {
     private PasswordEncoder passwordEncoder;
  
     @Autowired
-    private AccountRepository accountRepository;
+    private PersonRepository accountRepository;
  
     @PostConstruct
     public void init() {
-        Account larry = new Account();
+        Person larry = new Person();
         larry.setUsername("larry");
         larry.setPassword(passwordEncoder.encode("larry"));
-        larry.setAuthorities(Arrays.asList("USER"));
+        larry.getRights().add(new Authority(new SimpleGrantedAuthority("USER")));
         accountRepository.save(larry);
          
-        Account moe = new Account();
+        Person moe = new Person();
         moe.setUsername("moe");
         moe.setPassword(passwordEncoder.encode("moe"));
-        moe.setAuthorities(Arrays.asList("USER", "ADMIN"));
+        moe.getRights().add(new Authority(new SimpleGrantedAuthority("ADMIN")));
         accountRepository.save(moe);
          
-        Account curly = new Account();
+        Person curly = new Person();
         curly.setUsername("curly");
         curly.setPassword(passwordEncoder.encode("curly"));
-        curly.setAuthorities(Arrays.asList("ADMIN"));
+        curly.getRights().add(new Authority(new SimpleGrantedAuthority("ADMIN")));
         accountRepository.save(curly);
     }
 }

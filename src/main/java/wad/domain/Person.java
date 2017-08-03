@@ -1,25 +1,29 @@
 package wad.domain;
 
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.ElementCollection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class Account extends AbstractPersistable<Long> {
+public class Person extends AbstractPersistable<Long> {
     
     private String name;
     private String username;
     private String password;
     
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> authorities;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Authority> rights;
 
-    public Account() {
+    public Person() {
+        this.rights = new ArrayList<>();
     }
 
-    public Account(String name, String username, String password) {
+    public Person(String name, String username, String password) {
+        this.rights = new ArrayList<>();
         this.name = name;
         this.username = username;
         this.password = password;
@@ -37,8 +41,12 @@ public class Account extends AbstractPersistable<Long> {
         this.password = password;
     }
 
-    public void setAuthorities(List<String> authorities) {
-        this.authorities = authorities;
+    public void setRights(List<Authority> rights) {
+        this.rights = rights;
+    }
+
+    public List<Authority> getRights() {
+        return rights;
     }
 
     public String getName() {
@@ -51,10 +59,6 @@ public class Account extends AbstractPersistable<Long> {
 
     public String getPassword() {
         return password;
-    }
-
-    public List<String> getAuthorities() {
-        return authorities;
     }
     
 }

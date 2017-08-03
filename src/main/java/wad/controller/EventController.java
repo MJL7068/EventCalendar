@@ -2,6 +2,7 @@ package wad.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -11,10 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import wad.domain.Account;
+import wad.domain.Person;
 import wad.domain.Event;
-import wad.repository.AccountRepository;
 import wad.repository.EventRepository;
+import wad.repository.PersonRepository;
 
 @Controller
 public class EventController {
@@ -23,7 +24,7 @@ public class EventController {
     private EventRepository eventRepository;
 
     @Autowired
-    private AccountRepository accountRepository;
+    private PersonRepository accountRepository;
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(Model model) {
@@ -32,6 +33,7 @@ public class EventController {
         return "index";
     }
 
+    @Secured("ADMIN")
     @RequestMapping(method = RequestMethod.POST)
     public String postEvent(@ModelAttribute Event event) {
         eventRepository.save(event);
@@ -59,7 +61,7 @@ public class EventController {
         String name = auth.getName();
 
         Event event = eventRepository.findOne(id);
-        Account account = accountRepository.findByUsername(name);
+        Person account = accountRepository.findByUsername(name);
 
         event.getParticipants().add(account);
         eventRepository.save(event);
@@ -71,7 +73,7 @@ public class EventController {
     public String removeParticipant(@PathVariable Long eventId, @PathVariable String username) {
         Event event = eventRepository.findOne(eventId);
 
-        List<Account> accounts = event.getParticipants();
+        List<Person> accounts = event.getParticipants();
         for (int i = 0; i < accounts.size(); i++) {
             if (accounts.get(i).getUsername().equals(username)) {
                 event.getParticipants().remove(i);
