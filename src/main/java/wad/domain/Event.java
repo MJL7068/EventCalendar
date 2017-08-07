@@ -7,7 +7,7 @@ import javax.persistence.OneToMany;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class Event extends AbstractPersistable<Long> {
+public class Event extends AbstractPersistable<Long>/*AbstractStringId*/ {
     
     private String name;
     private String description;

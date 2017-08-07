@@ -24,7 +24,7 @@ public class EventController {
     private EventRepository eventRepository;
 
     @Autowired
-    private PersonRepository accountRepository;
+    private PersonRepository personRepository;
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(Model model) {
@@ -33,7 +33,7 @@ public class EventController {
         return "index";
     }
 
-    @Secured("ADMIN")
+//    @Secured("ADMIN")
     @RequestMapping(method = RequestMethod.POST)
     public String postEvent(@ModelAttribute Event event) {
         eventRepository.save(event);
@@ -61,7 +61,7 @@ public class EventController {
         String name = auth.getName();
 
         Event event = eventRepository.findOne(id);
-        Person account = accountRepository.findByUsername(name);
+        Person account = personRepository.findByUsername(name);
 
         event.getParticipants().add(account);
         eventRepository.save(event);

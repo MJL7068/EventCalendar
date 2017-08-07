@@ -17,6 +17,18 @@
                 </form>
             </li>
         </ul>
+        
+        <ul>
+            <li th:each="comment : ${comments}">
+                <span th:text="${comment.author.name}">name</span>
+                <span th:text="${comment.content}">content</span>
+            </li>
+        </ul>
+
+        <form th:action="@{/comments/{eventId}(eventId=${event.id})}" th:method="POST">
+            <textarea name="content"> </textarea>
+            <input type="submit" value="Send comment" />
+        </form>
 
         <a href="/">Back to index</a>
     </body>
