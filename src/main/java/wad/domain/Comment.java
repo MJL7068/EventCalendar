@@ -13,8 +13,9 @@ public class Comment extends AbstractPersistable<Long> {
     @ManyToOne
     private Person author;
     
-    @ManyToOne
-    private Event event;
+//    @ManyToOne
+//    private Event event;
+    private String eventId;
     
     @Column(name = "COMMENT_DATE")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
@@ -50,12 +51,20 @@ public class Comment extends AbstractPersistable<Long> {
         this.content = content;
     }
 
-    public Event getEvent() {
-        return event;
+//    public Event getEvent() {
+//        return event;
+//    }
+//
+//    public void setEvent(Event event) {
+//        this.event = event;
+//    }
+
+    public String getEventId() {
+        return eventId;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
     }
     
 }

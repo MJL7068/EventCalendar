@@ -1,5 +1,6 @@
 package wad.controller;
 
+import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import wad.domain.Person;
 import wad.domain.Event;
+import wad.repository.CommentRepository;
 import wad.repository.EventRepository;
 import wad.repository.PersonRepository;
 
@@ -25,6 +27,9 @@ public class EventController {
 
     @Autowired
     private PersonRepository personRepository;
+    
+    @Autowired
+    private CommentRepository commentRepository;
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(Model model) {
@@ -42,21 +47,23 @@ public class EventController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String getEvent(@PathVariable Long id, Model model) {
+    public String getEvent(@PathVariable /*Long*/String id, Model model) {
         model.addAttribute("event", eventRepository.getOne(id));
-
+        
+        model.addAttribute("comments", commentRepository.findByEventIdIn(Arrays.asList(id)));
+        
         return "event";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String deleteEvent(@PathVariable Long id) {
+    public String deleteEvent(@PathVariable /*Long*/String id) {
         eventRepository.delete(id);
 
         return "redirect:/";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public String addParticipant(@PathVariable Long id) {
+    public String addParticipant(@PathVariable /*Long*/String id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
 
@@ -70,7 +77,7 @@ public class EventController {
     }
 
     @RequestMapping(value = "/removeParticipant/{eventId}/{username}", method = RequestMethod.DELETE)
-    public String removeParticipant(@PathVariable Long eventId, @PathVariable String username) {
+    public String removeParticipant(@PathVariable /*Long*/String eventId, @PathVariable String username) {
         Event event = eventRepository.findOne(eventId);
 
         List<Person> accounts = event.getParticipants();

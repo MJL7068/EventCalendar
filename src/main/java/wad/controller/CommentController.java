@@ -26,9 +26,9 @@ public class CommentController {
     private PersonService personService;
     
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public String postComment(@PathVariable Long id, /*@RequestParam String content*/@ModelAttribute Comment comment) {
+    public String postComment(@PathVariable String id, /*@RequestParam String content*/@ModelAttribute Comment comment) {
         comment.setAuthor(personService.getAuthPerson());
-        comment.setEvent(eventRepository.findOne(id));
+        comment.setEventId(id);
         commentRepository.save(comment);
         
         return "redirect:/" + id;
