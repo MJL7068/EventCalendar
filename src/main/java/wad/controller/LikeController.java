@@ -1,5 +1,8 @@
 package wad.controller;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +35,21 @@ public class LikeController {
         newLike.setPerson(person);
         
         return likeRepository.save(newLike);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET)
+    public Map<String, Integer> getLikeCounts(@RequestParam String[] ids) {
+        Map<String, Integer> likeCounts = new HashMap<>();
+        
+        for (Like like : likeRepository.findByCommentIdIn(Arrays.asList(ids))) {
+            if (!likeCounts.containsKey(like.getCommentId())) {
+                likeCounts.put(like.getCommentId(), 0);
+            }
+            
+            likeCounts.put(like.getCommentId(), likeCounts.get(like.getCommentId()) + 1);
+        }
+        
+        return likeCounts;
     }
     
 }
